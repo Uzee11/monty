@@ -1,94 +1,28 @@
+#include <stdio.h>
+#include <stdlib.h>
 #include "monty.h"
 
-/**
- * main - Entry point for the Monty interpreter
- * ... (unchanged)
- */
-
-/**
- * process_line - Process a single line of Monty byte code instruction
- * @line: Monty byte code instruction
- * @line_number: Line number in the file
- */
-void process_line(char *line, unsigned int line_number)
-{
-    char *opcode, *argument;
-    int value;
-
-    opcode = strtok(line, " \t\n");
-    if (!opcode || opcode[0] == '#') /* Ignore comments and empty lines */
-        return;
-
-    if (strcmp(opcode, "push") == 0)
-    {
-        argument = strtok(NULL, " \t\n");
-        if (!argument || !is_integer(argument))
-        {
-            fprintf(stderr, "L%d: usage: push integer\n", line_number);
-            exit(EXIT_FAILURE);
-        }
-        value = atoi(argument);
-        push(&stack, value);
-    }
-    else if (strcmp(opcode, "pall") == 0)
-    {
-        pall(stack);
-    }
-    /* Add more opcodes as needed */
-}
-
-/**
- * is_integer - Check if a string represents an integer
- * @str: String to check
- * Return: 1 if it's an integer, 0 otherwise
- */
-int is_integer(const char *str)
-{
-    if (!str)
-        return 0;
-
-    while (*str)
-    {
-        if (!isdigit(*str) && *str != '-')
-            return 0;
-        str++;
-    }
-    return 1;
-}
-
-/**
- * push - Push a value onto the stack
- * @stack: Pointer to the top of the stack
- * @value: Value to push
- */
+/* Function to handle push opcode */
 void push(stack_t **stack, int value)
 {
-    stack_t *new_node = malloc(sizeof(stack_t));
-    if (!new_node)
-    {
-        fprintf(stderr, "Error: malloc failed\n");
-        exit(EXIT_FAILURE);
-    }
-
-    new_node->n = value;
-    new_node->prev = NULL;
-    new_node->next = *stack;
-
-    if (*stack)
-        (*stack)->prev = new_node;
-
-    *stack = new_node;
+    /* Implement push logic here */
 }
 
-/**
- * pall - Print all values on the stack
- * @stack: Pointer to the top of the stack
- */
-void pall(const stack_t *stack)
+/* Function to handle pall opcode */
+void pall(stack_t **stack)
 {
-    while (stack)
-    {
-        printf("%d\n", stack->n);
-        stack = stack->next;
-    }
+    /* Implement pall logic here */
 }
+
+int main(int argc, char *argv[])
+{
+    /* ... your main logic here */
+
+    /* Example usage within your code */
+    stack_t *stack = NULL; // Initialize your stack
+    push(&stack, 10); /* Example: Pushing value 10 */
+    pall(&stack); /* Example: Printing all values in the stack */
+
+    return EXIT_SUCCESS;
+}
+
